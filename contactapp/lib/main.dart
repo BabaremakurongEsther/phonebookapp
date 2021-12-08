@@ -22,6 +22,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List myContacts = listOfContacts;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -36,14 +37,14 @@ class HomePage extends StatelessWidget {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 16),
-            child: CircleAvatar(
+            child: const CircleAvatar(
               backgroundImage: AssetImage("images/woman.jpg"),
             ),
           ),
         ],
       ),
       body: ListView.builder(
-          itemCount: 10,
+          itemCount: myContacts.length,
           itemBuilder: (BuildContext context, index) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,18 +74,23 @@ class HomePage extends StatelessWidget {
                   ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ContactPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ContactPage(
+                                  myContact: myContacts[index],
+                                )));
                   },
-                  child: const ListTile(
+                  child: ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: AssetImage("images/lady.jpg"),
+                      backgroundImage: NetworkImage(
+                          "${myContacts[index]["image"]} ${index + 29}"),
                     ),
                     title: Text(
-                      "Techries Ghana",
-                      style: TextStyle(fontWeight: FontWeight.w800),
+                      myContacts[index]["name"],
+                      style: const TextStyle(fontWeight: FontWeight.w800),
                     ),
-                    subtitle: Text("+233 505 419 44"),
+                    subtitle: Text(myContacts[index]["phone"]),
                     trailing: Icon(Icons.more_horiz),
                   ),
                 ),
@@ -106,3 +112,94 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+List listOfContacts = [
+  {
+    "name": "Esther Smith",
+    "location": "Ullo",
+    "email": "babaremakurong@gmail.com",
+    "phone": "+233249975413",
+    "Group": "Family",
+    "image": "https://picsum.photos/200/300?random="
+  },
+  {
+    "name": "Dery Songnouma",
+    "location": "Tampoe",
+    "email": "mary@gmail.com",
+    "phone": "+233249975434",
+    "Group": "National Mobile App Dev",
+    "image": "https://picsum.photos/200/300?random="
+  },
+  {
+    "name": "Wiribare Emmanuel",
+    "location": "Tuopare",
+    "email": "wiribare@gmail.com",
+    "phone": "+233249975169",
+    "Group": "Pax platform",
+    "image": "https://picsum.photos/200/300?random="
+  },
+  {
+    "name": "Alice Aasoma",
+    "location": "Kpare",
+    "email": "aliceaasoma@gmail.com",
+    "phone": "+233248575417",
+    "Group": " IT Department",
+    "image": "https://picsum.photos/200/300?random="
+  },
+  {
+    "name": "Donzie Modestar",
+    "location": "Karni",
+    "email": "modesta@gmail.com",
+    "phone": "+233241115410",
+    "Group": "Karni Community",
+    "image": "https://picsum.photos/200/300?random="
+  },
+  {
+    "name": "Tibgoro Max",
+    "location": "Jirapa",
+    "email": "max@gmail.com",
+    "phone": "+233249900419",
+    "Group": "Developers",
+    "image": "https://picsum.photos/200/300?random="
+  },
+  {
+    "name": "Tengbee Moses",
+    "location": "Kogri",
+    "email": "tenbee@gmail.com",
+    "phone": "+233249975418",
+    "Group": "Family",
+    "image": "https://picsum.photos/200/300?random="
+  },
+  {
+    "name": "Dery Max",
+    "location": "Vivin",
+    "email": "dery@gmail.com",
+    "phone": "+233249975409",
+    "Group": "CCR",
+    "image": "https://picsum.photos/200/300?random="
+  },
+  {
+    "name": "Ngmennapoe Jere",
+    "location": "Gyanvuuri",
+    "email": "ngmennapoe@gmail.com",
+    "phone": "+233249975431",
+    "Group": "Girls child education",
+    "image": "https://picsum.photos/200/300?random="
+  },
+  {
+    "name": "Kelvin Dorzie",
+    "location": "Ul_Kpong",
+    "email": "dorzie@gmail.com",
+    "phone": "+233249975420",
+    "Group": "Farmers",
+    "image": "https://picsum.photos/200/300?random="
+  },
+  {
+    "name": "Kpokpore Janet",
+    "location": "Kogri No.2",
+    "email": "kpokpore@gmail.com",
+    "phone": "+233249975418",
+    "Group": "Market women",
+    "image": "https://picsum.photos/200/300?random="
+  },
+];
